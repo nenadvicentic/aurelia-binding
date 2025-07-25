@@ -1859,7 +1859,7 @@ System.register(['aurelia-logging', 'aurelia-pal', 'aurelia-task-queue', 'aureli
 
         AccessMember.prototype.evaluate = function evaluate(scope, lookupFunctions) {
           var instance = this.object.evaluate(scope, lookupFunctions);
-          return instance === null || instance === undefined ? instance : instance[this.name];
+          return instance === null || instance === undefined ? undefined : instance[this.name];
         };
 
         AccessMember.prototype.assign = function assign(scope, value) {

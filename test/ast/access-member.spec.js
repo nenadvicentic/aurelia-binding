@@ -21,14 +21,14 @@ describe('AccessMember', () => {
 
   it('assigns member on bindingContext', () => {
     let scope = createScopeForTest({ foo: { bar: 'baz' } });
-    expression.assign(scope, 'bang')
+    expression.assign(scope, 'bang');
     expect(scope.bindingContext.foo.bar).toBe('bang');
   });
 
   it('assigns member on overrideContext', () => {
     let scope = createScopeForTest({});
     scope.overrideContext.foo = { bar: 'baz' };
-    expression.assign(scope, 'bang')
+    expression.assign(scope, 'bang');
     expect(scope.overrideContext.foo.bar).toBe('bang');
   });
 
@@ -36,4 +36,20 @@ describe('AccessMember', () => {
     let scope = createScopeForTest({ foo: { bar: 'baz' } });
     expect(expression.assign(scope, 'bang')).toBe('bang');
   });
+
+  it('returns `undefined` for a non-existing member of `null` object', () => {
+    let scope = createScopeForTest({ foo: null });
+    expect(expression.evaluate(scope, null)).toBeUndefined();
+  });
+
+  it('returns `undefined` for a non-existing member of `undefined` object', () => {
+    let scope = createScopeForTest({ foo: undefined });
+    expect(expression.evaluate(scope, null)).toBeUndefined();
+  });
+
+  it('returns `undefined` for a non-existing member of non-existing object', () => {
+    let scope = createScopeForTest({});
+    expect(expression.evaluate(scope, null)).toBeUndefined();
+  });
+
 });

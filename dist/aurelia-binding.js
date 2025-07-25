@@ -1440,7 +1440,7 @@ export class AccessMember extends Expression {
 
   evaluate(scope, lookupFunctions) {
     let instance = this.object.evaluate(scope, lookupFunctions);
-    return instance === null || instance === undefined ? instance : instance[this.name];
+    return instance === null || instance === undefined ? undefined : instance[this.name];
   }
 
   assign(scope, value) {
