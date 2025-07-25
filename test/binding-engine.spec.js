@@ -1,3 +1,4 @@
+import './setup';
 import {TaskQueue} from 'aurelia-task-queue';
 import {bindingMode} from '../src/binding-mode';
 import {DirtyChecker} from '../src/dirty-checking';

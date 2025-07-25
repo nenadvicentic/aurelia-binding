@@ -10,20 +10,13 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jspm', 'jasmine'],
-
-    jspm: {
-      // Edit this to your needs
-      loadFiles: [
-        'test/setup.js',
-        'src/**/*.js',
-        'test/**/*.js'
-      ]
-    },
+    frameworks: ['jasmine'],
 
 
     // list of files / patterns to load in the browser
-    files: [],
+    files: [
+      { pattern: 'test/**/*.spec.js', watched: false }
+    ],
 
 
     // list of files to exclude
@@ -34,21 +27,33 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'test/**/*.js': ['babel'],
-      'src/**/*.js': ['babel']
+      'test/**/*.js': ['webpack'],
+      'src/**/*.js': ['webpack']
     },
-    'babelPreprocessor': {
-      options: {
-        sourceMap: 'inline',
-        presets: [ 'es2015-loose', 'stage-1'],
-        plugins: [
-          'syntax-flow',
-          'transform-decorators-legacy',
-          'transform-flow-strip-types'
+    webpack: {
+      // webpack configuration goes here
+      mode: 'development',
+      module: {
+        rules: [
+          {
+            test: /\.js$/,
+            exclude: /node_modules/,
+            use: {
+              loader: 'babel-loader',
+              options: {
+                sourceMap: 'inline',
+                presets: [ 'es2015-loose', 'stage-1'],
+                plugins: [
+                  'syntax-flow',
+                  'transform-decorators-legacy',
+                  'transform-flow-strip-types'
+                ]
+              }
+            }
+          }
         ]
       }
     },
-
 
     // test results reporter to use
     // possible values: 'dots', 'progress'

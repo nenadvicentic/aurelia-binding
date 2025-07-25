@@ -20,49 +20,47 @@ To build the code, follow these steps.
 1. Ensure that [NodeJS](http://nodejs.org/) is installed. This provides the platform on which the build tooling runs.
 2. From the project folder, execute the following command:
 
-  ```shell
-  npm install
-  ```
-3. Ensure that [Gulp](http://gulpjs.com/) is installed. If you need to install it, use the following command:
+    ```shell
+    npm install
+    ```
+3. Execute build command:
+    ```shell
+    npm run build
+    ```
+    `npm run build` uses `gulp build` command under the hood.
 
-  ```shell
-  npm install -g gulp
-  ```
-4. To build the code, you can now run:
+4. You will find the compiled code in the `dist` folder, available in three module formats: AMD, CommonJS and ES6.
 
-  ```shell
-  gulp build
-  ```
-5. You will find the compiled code in the `dist` folder, available in three module formats: AMD, CommonJS and ES6.
-
-6. See `gulpfile.js` for other tasks related to generating the docs and linting.
+5. See `gulpfile.js` for other tasks related to generating the docs and linting. The tasks are located in `/build` folder.
 
 ## Running The Tests
 
 To run the unit tests, first ensure that you have followed the steps above in order to install all dependencies and successfully build the library. Once you have done that, proceed with these additional steps:
 
-1. Ensure that the [Karma](http://karma-runner.github.io/) CLI is installed. If you need to install it, use the following command:
+1. From the project folder, execute the following command:
 
-  ```shell
-  npm install -g karma-cli
-  ```
-2. Ensure that [jspm](http://jspm.io/) is installed. If you need to install it, use the following commnand:
-
-  ```shell
-  npm install -g jspm
-  ```
-3. Install the client-side dependencies with jspm:
-
-  ```shell
-  jspm install
-  ```
+    ```shell
+    npm install
+    ```
 
 4. You can now run the tests with this command:
 
-  ```shell
-  karma start
-  ```
+    ```shell
+    npm run test
+    ```
+
+    `npm run test` command uses `karma start --single-run` command under the hood.
+  
   To test in Internet Explorer use this command:
   ```shell
   karma start --browsers IE
   ```
+
+  ### How tests are configured
+
+[Karma](http://karma-runner.github.io/) runner (version 1) is used to run tests in browser, while [Webpack](https://v4.webpack.js.org/) (version 4) is used as the loader for `src` and `test` files.
+
+#### Older version of NPM packages
+The reason to use version 4 of Webpack, version 7 of [babel-loader](https://webpack.js.org/loaders/babel-loader/) and version 6 [Babel](https://babeljs.io/) is that [babel-preset-es2015](https://babeljs.io/docs/babel-preset-es2015) and it's bundled plugins `babel-plugin-transform-es2015-*` have been depracted in favour of new [babel-preset-env](https://babeljs.io/docs/babel-preset-env).
+
+Differences are decribed in the article [babel-preset-es2015 -> babel-preset-env](https://babeljs.io/docs/env/).

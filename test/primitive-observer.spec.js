@@ -1,3 +1,4 @@
+import './setup';
 import {PrimitiveObserver} from '../src/property-observation';
 import {createObserverLocator} from './shared';
 
